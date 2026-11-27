@@ -1,8 +1,11 @@
 import { isStaff, pickMembership, requireSession } from "@/lib/auth/session";
 import { getPortalData } from "@/lib/work/queries";
 import { Metadata } from "next";
+import { AppShell } from "@/components/app/AppShell";
+import { WorkCard } from "@/components/app/WorkCard";
+import { OrgSwitcher } from "@/components/app/OrgSwitcher";
 
-export const meta: Metadata = { title: "ClientPortal" };
+export const metadata: Metadata = { title: "ClientPortal" };
 
 export default async function PortalPage({
     searchParams,
@@ -17,7 +20,7 @@ export default async function PortalPage({
 
     if (!current) {
         return (
-            <AppShell surface="Client portal" email={email} links={links}>
+            <AppShell surface="Client portal" email={email} links={link}>
                 <h1>Client portal</h1>
                 <p className="empty">
                     {membershipsFailed
@@ -35,7 +38,7 @@ export default async function PortalPage({
             surface="Client portal"
             email={email}
             organizationName={current.organizationName}
-            links={links}
+            links={link}
         >
             <div className="page__head">
                 <div>

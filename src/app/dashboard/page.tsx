@@ -3,6 +3,9 @@ import { createClient } from "@/lib/supabase/server";
 import { Metadata } from "next";
 import { isStaff, pickMembership, requireSession } from "@/lib/auth/session";
 import { getDashboardData } from "@/lib/work/queries";
+import { AppShell } from "@/components/app/AppShell";
+import { OrgSwitcher } from "@/components/app/OrgSwitcher";
+import { WorkCard } from "@/components/app/WorkCard";
 
 export const metadata: Metadata = { title: "Operations" };
 
@@ -40,7 +43,7 @@ export default async function DashboardPage({
             surface="Operations"
             email={email}
             organizationName={current.organizationName}
-            links={links}
+            links={link}
         >
             <div className="page__head">
                 <div>

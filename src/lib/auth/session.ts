@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "../supabase/server";
 
-export type Role = "owner" | "opeartor" | "viewer";
+export type Role = "owner" | "operator" | "viewer";
 
 export type OrgMembership = {
     organizationId: string,
@@ -9,7 +9,7 @@ export type OrgMembership = {
     role: Role;
 };
 
-export const STAFF_ROLES: Role[] = ["owner", "opeartor"];
+export const STAFF_ROLES: Role[] = ["owner", "operator"];
 
 export function isStaff(membership: OrgMembership) {
     return STAFF_ROLES.includes(membership.role);
@@ -26,7 +26,7 @@ export async function requireSession() {
     }
 
     const userId = data.claims.sub as string;
-    const email = data.claims.sub as string | undefined;
+    const email = data.claims.email as string | undefined;
 
     const { data: rows, error } = await supabase
         .from("memberships")

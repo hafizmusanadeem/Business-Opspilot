@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 // Server-side Supabase client. Uses the publishable key, so RLS still applies.
-export async function createClient() {
+export async function createClient(): Promise<import("@supabase/supabase-js").SupabaseClient<any, "public", "public", any, any>> {
     const cookieStore = await cookies();
 
     return createServerClient(
